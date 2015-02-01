@@ -7,11 +7,15 @@ angular.module('starter', ['ionic'])
 
 .service('apiService', function($http){
   this.edgeLit = function() { $http.get('/api/edgeLit'); };
+  this.avgLit = function() { $http.get('/api/avgLit'); };
+  this.moodLit = function() { $http.get('/api/moodLit'); };
   this.lightsOff = function() { $http.get('/api/lightsOff'); };
 })
 
 .controller('OnlyController', ['$scope', 'apiService', function($scope, apiService){
   $scope.edgeLit = function() { apiService.edgeLit(); };
+  $scope.avgLit = function() { apiService.avgLit(); };
+  $scope.moodLit = function() { apiService.moodLit(); };
   $scope.lightsOff = function() { apiService.lightsOff(); };
 }])
 
