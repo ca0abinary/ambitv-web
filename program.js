@@ -15,15 +15,15 @@ app.use(serveStatic('www'))
 
 app.use('/api', function apiMiddleware(req, res, next){
   if (/edgeLit/i.test(req.url)) { // /api/edgeLit
-    exec('pkill -SIGINT ambi && sleep 1 && screen -d -m /usr/sbin/ambi-tv &')
+    exec('sh edgeLit.sh')
     res.end(JSON.stringify({operation:'edgeLit',status:'complete'}))
   }
   else if (/avgLit/i.test(req.url)) { // /api/avgLit
-    exec('pkill -SIGINT ambi && sleep 1 && screen -d -m /usr/sbin/ambi-tv -f /etc/ambi-tv-avg.conf&')
+    exec('sh avgLit.sh')
     res.end(JSON.stringify({operation:'avgLit',status:'complete'}))
   }
   else if (/moodLit/i.test(req.url)) { // /api/moodLit
-    exec('pkill -SIGINT ambi && sleep 1 && screen -d -m /usr/sbin/ambi-tv -f /etc/ambi-tv-mood.conf&')
+    exec('sh moodLit.sh')
     res.end(JSON.stringify({operation:'moodLit',status:'complete'}))
   }
   else if (/lightsOff/i.test(req.url)) { // /api/lightsOff
@@ -33,4 +33,4 @@ app.use('/api', function apiMiddleware(req, res, next){
   next()
 })
 
-http.createServer(app).listen(8080)
+http.createServer(app).listen(80)
